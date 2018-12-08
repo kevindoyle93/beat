@@ -34,11 +34,11 @@ class Tile {
   
   void draw() {
     fill(fillColor);
+    strokeWeight(4);
     if (active) {
-      strokeWeight(4);
       stroke(color(255));
     } else {
-      noStroke();
+      stroke(color(200));
     }
     rect(x, y, w, h); 
   }
