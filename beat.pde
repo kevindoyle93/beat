@@ -9,22 +9,23 @@ Minim minim;
 AudioPlayer loop;
 BeatDetect beatDetect;
 BeatListener beatListener;
+int BPM = 60;
 
 void setup() {
   size(600, 600);
   background(200);
   
   minim = new Minim(this);
-  loop = minim.loadFile("audio/hats.wav");
+  loop = minim.loadFile("audio/60.wav");
   loop.loop();
   beatDetect = new BeatDetect(loop.bufferSize(), loop.sampleRate());
-  beatDetect.setSensitivity(3000);
+  beatDetect.setSensitivity(530);
   beatListener = new BeatListener(beatDetect, loop);
 }
 
 Board board = new Board(600, 8);
 
-void draw() {
+void draw() {  
   board.draw();
   
   beatDetect.detect(loop.mix);
