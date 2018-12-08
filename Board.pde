@@ -7,7 +7,7 @@ class Board {
   public Board(int gameWidth, int numTiles) {
     float tileSize = gameWidth * 0.8 / numTiles;
     float offset = gameWidth * 0.075;
-    float gap = 0.5 * numTiles;
+    float gap = 5;
     this.tiles = new Tile[numTiles][numTiles];
     
     float y = offset;

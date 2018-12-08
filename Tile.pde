@@ -36,9 +36,9 @@ class Tile {
     fill(fillColor);
     if (active) {
       strokeWeight(4);
-      stroke(color(0, 255, 0));
+      stroke(color(255));
     } else {
-      stroke(strokeColor);
+      noStroke();
     }
     rect(x, y, w, h); 
   }
