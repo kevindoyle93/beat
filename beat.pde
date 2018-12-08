@@ -11,7 +11,7 @@ AudioPlayer ticks;
 
 int targetBeat;
 
-int BPM = 60;
+int BPM = 120;
 
 boolean listening;
 
@@ -28,16 +28,13 @@ void setup() {
   ticks = minim.loadFile("audio/120.wav");
   tune.play();
   
-  for (int i = 0; i < numTries; i++) {
-    dones.add(false);
-  }
+  targetBeat = int(((float(60) / float(BPM)) * 3) * 1000);
 }
 
 Board board;
 Gamebar gamebar;
+int startTime;
 
-ArrayList<Boolean> dones = new ArrayList();
-int numTries = 10;
 void draw() {
   gamebar.draw();
   board.draw();
@@ -49,6 +46,8 @@ void draw() {
   
   if (listening && !tune.isPlaying()) {
     ticks.play(0);
+    startTime = millis();
+    print("ticks has started");
     listening = false;
   }
   
@@ -57,14 +56,12 @@ void draw() {
     listening = true;
   } //<>//
   
-  targetBeat = ((60 / BPM) * 3) * 1000;
-  
-  for (int i = 1; i <= numTries; i++) {
-    if (!dones.get(i - 1) && millis() > targetBeat * i) {
-      matchBeatMock();
-      dones.set(i - 1, true);
+  if (ticks.isPlaying()) {
+    if (millis() > targetBeat + startTime) {
+      board.beatMatcher.onBeatHit();
     }
   }
+  
 }
 
 void keyPressed() {
@@ -79,11 +76,6 @@ void keyPressed() {
       board.movePlayer(Direction._RIGHT);
     }
   } else if (key == ENTER) {
-    // perform beat matching
     board.beatMatch();
   }
-}
-
-void matchBeatMock() {
-  board.beatMatcher.onBeatHit();
 }

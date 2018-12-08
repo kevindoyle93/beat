@@ -21,10 +21,13 @@ class BeatMatcher {
   }
   
   void onBeatHit() {
-    beatHit = true;
-    beatTime = millis();
+    if (!beatHit) {
+      print("beat has hit");
+      beatHit = true;
+      beatTime = millis();
+    }
     if (playerHit) {
-      getDifference();
+       getDifference();
     }
   }
   
