@@ -56,7 +56,11 @@ class Board {
     activeY = int(random(8));
     
     playerTile = tiles[activeX][activeY];
-    playerTile.active = true;
+    if (playerTile.fillColor == targetColor) {
+      assignPlayerLocation();
+    } else {
+      playerTile.active = true;
+    }
   }
   
   void chooseTargetColour() {
