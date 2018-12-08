@@ -4,6 +4,7 @@ class Board {
   Tile goalTile;
   int activeX, activeY;
   color targetColor;
+  boolean playerOnTarget = false;
   
   public color[] tileColors = {
     color(78,255,0), 
@@ -26,6 +27,7 @@ class Board {
     float gap = 5;
     this.tiles = new Tile[numTiles][numTiles];
     
+    chooseTargetColour();
     
     float y = offset;
     for (int i = 0; i < tiles.length; i++) {
@@ -67,26 +69,28 @@ class Board {
   }
   
   void movePlayer(Direction direction) {
-    if (direction == Direction._UP) {
-      activeX = (((activeX - 1) % tiles.length) + tiles.length) % tiles.length;
-    } else if (direction == Direction._DOWN) {
-      activeX = (activeX + 1) % tiles.length;
-    } else if (direction == Direction._LEFT) {
-      activeY = (((activeY - 1) % tiles.length) + tiles.length) % tiles.length;
-    } else if (direction == Direction._RIGHT) {
-      activeY = (activeY + 1) % tiles[0].length;
-    }
-    
-    playerTile.active = false;
-    playerTile = tiles[activeX][activeY]; //<>// //<>//
-    playerTile.active = true;
-    
-    print(playerTile.fillColor);
-    print(targetColor);
-    
-    if (playerTile.fillColor == targetColor) {
-      print("ayyy");
-    }
+    if (!playerOnTarget) {
+      if (direction == Direction._UP) {
+        activeX = (((activeX - 1) % tiles.length) + tiles.length) % tiles.length;
+      } else if (direction == Direction._DOWN) {
+        activeX = (activeX + 1) % tiles.length;
+      } else if (direction == Direction._LEFT) {
+        activeY = (((activeY - 1) % tiles.length) + tiles.length) % tiles.length;
+      } else if (direction == Direction._RIGHT) {
+        activeY = (activeY + 1) % tiles[0].length;
+      }
+      
+      playerTile.active = false;
+      playerTile = tiles[activeX][activeY]; //<>// //<>//
+      playerTile.active = true;
+      
+      if (playerTile.fillColor == targetColor) {
+        print("Tile is correct!");
+        //player is on the correct tile
+        //player cannot move until end of round
+        
+        playerOnTarget = true;
+      }
     
   }
 }
