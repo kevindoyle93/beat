@@ -3,6 +3,22 @@ class Board {
   Tile playerTile;
   Tile goalTile;
   int activeX, activeY;
+  color targetColor;
+  
+  public color[] tileColors = {
+    color(78,255,0), 
+    color(0,255,50), 
+    color(0,205,255), 
+    color(0,78,255), 
+    color(0,255,177), 
+    color(0,205,255),
+    color(0,253,255),
+    color(0,126,255),
+    color(2,0,255),
+    color(130,0,255),
+    color(255,0,253),
+    color(255,0,126)
+  };
   
   public Board(int gameWidth, int numTiles) {
     float tileSize = gameWidth * 0.8 / numTiles;
@@ -38,6 +54,10 @@ class Board {
     playerTile.active = true;
   }
   
+  void chooseTargetColour() {
+    targetColor = tileColors[int(random(tileColors.length))];
+  }
+  
   void draw() {
     for (int i = 0; i < tiles.length; i++) {
       for (int j = 0; j < tiles[0].length; j++) {
@@ -60,6 +80,14 @@ class Board {
     playerTile.active = false;
     playerTile = tiles[activeX][activeY]; //<>// //<>//
     playerTile.active = true;
+    
+    print(playerTile.fillColor);
+    print(targetColor);
+    
+    if (playerTile.fillColor == targetColor) {
+      print("ayyy");
+    }
+    
   }
 }
 
