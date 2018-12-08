@@ -1,12 +1,38 @@
+import ddf.minim.*;
+import ddf.minim.analysis.*;
+import ddf.minim.effects.*;
+import ddf.minim.signals.*;
+import ddf.minim.spi.*;
+import ddf.minim.ugens.*;
+
+Minim minim;
+AudioPlayer loop;
+BeatDetect beatDetect;
+BeatListener beatListener;
+
 void setup() {
   size(600, 600);
   background(200);
+  
+  minim = new Minim(this);
+  loop = minim.loadFile("audio/hats.wav");
+  loop.loop();
+  beatDetect = new BeatDetect(loop.bufferSize(), loop.sampleRate());
+  beatDetect.setSensitivity(3000);
+  beatListener = new BeatListener(beatDetect, loop);
 }
 
 Board board = new Board(600, 8);
 
 void draw() {
   board.draw();
+  
+  beatDetect.detect(loop.mix);
+  if (beatDetect.isKick()) {
+    println("kick");
+  } else if (beatDetect.isSnare()) {
+    println("snare");
+  }
 }
 
 void keyPressed() {
