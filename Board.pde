@@ -91,9 +91,16 @@ class Board {
         
         playerOnTarget = true;
       }
-    
+    }
+  }
+  
+  void beatMatch() {
+    if (playerOnTarget) {
+      //do the beat matching
+    }
   }
 }
+
 
 public enum Direction {
   _UP, _DOWN, _LEFT, _RIGHT;

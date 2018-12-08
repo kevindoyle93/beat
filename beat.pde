@@ -21,6 +21,7 @@ void keyPressed() {
       board.movePlayer(Direction._RIGHT);
     } else if (keyCode == ENTER) {
       // perform beat matching
+      board.beatMatch();
     }
   }
 }
