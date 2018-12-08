@@ -10,5 +10,17 @@ void draw() {
 }
 
 void keyPressed() {
-  // Tell the board to move player square
+  if (key == CODED) {
+    if (keyCode == UP) {
+      board.movePlayer(Direction._UP);
+    } else if (keyCode == DOWN) {
+      board.movePlayer(Direction._DOWN);
+    } else if (keyCode == LEFT) {
+      board.movePlayer(Direction._LEFT);
+    } else if (keyCode == RIGHT) {
+      board.movePlayer(Direction._RIGHT);
+    } else if (keyCode == ENTER) {
+      // perform beat matching
+    }
+  }
 }

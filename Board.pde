@@ -25,6 +25,7 @@ class Board {
         tiles[i][j] = new Tile(x, y, tileSize, tileSize, color(255), color(0), active);
       }
     }
+    playerTile = tiles[0][0];
   }
   
   void draw() {
@@ -36,23 +37,18 @@ class Board {
   }
   
   void movePlayer(Direction direction) {
-    print("ayy");
-    if (key == CODED) {
-      if (keyCode == UP) {
-        activeY = (activeY - 1) % tiles.length;
-      } else if (keyCode == DOWN) {
-        activeY = (activeY + 1) % tiles.length;
-      } else if (keyCode == LEFT) {
-        activeX = (activeX - 1) % tiles[0].length;
-      } else if (keyCode == RIGHT) {
-        activeX = (activeX + 1) % tiles[0].length;
-      } else if (keyCode == ENTER) {
-        // perform beat matching
-      }
+    if (direction == Direction._UP) {
+      activeX = (((activeX - 1) % tiles.length) + tiles.length) % tiles.length;
+    } else if (direction == Direction._DOWN) {
+      activeX = (activeX + 1) % tiles.length;
+    } else if (direction == Direction._LEFT) {
+      activeY = (((activeY - 1) % tiles.length) + tiles.length) % tiles.length;
+    } else if (direction == Direction._RIGHT) {
+      activeY = (activeY + 1) % tiles[0].length;
     }
     
     playerTile.active = false;
-    playerTile = tiles[activeX][activeY];
+    playerTile = tiles[activeX][activeY]; //<>//
     playerTile.active = true;
   }
 }
