@@ -2,13 +2,15 @@ class Board {
   Tile[][] tiles;
   Tile playerTile;
   Tile goalTile;
-  int activeX = 0, activeY = 0;
+  int activeX, activeY;
   
   public Board(int gameWidth, int numTiles) {
     float tileSize = gameWidth * 0.8 / numTiles;
     float offset = gameWidth * 0.075;
     float gap = 5;
     this.tiles = new Tile[numTiles][numTiles];
+    
+    assignPlayerLocation();
     
     float y = offset;
     for (int i = 0; i < tiles.length; i++) {
@@ -18,7 +20,7 @@ class Board {
       
       float x = offset;
       for (int j = 0; j < tiles[0].length; j++) {
-        boolean active = i == 0 && j == 0;
+        boolean active = i == activeX && j == activeY;
         if (j > 0) {
           x += tileSize + gap;
         }
@@ -26,6 +28,11 @@ class Board {
       }
     }
     playerTile = tiles[0][0];
+  }
+  
+  void assignPlayerLocation() {
+    activeX = int(random(8));
+    activeY = int(random(8));
   }
   
   void draw() {
