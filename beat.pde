@@ -11,7 +11,7 @@ AudioPlayer ticks;
 
 int targetBeat;
 
-int BPM = 120;
+int BPM = 60;
 
 boolean listening;
 
