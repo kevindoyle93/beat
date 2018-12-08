@@ -5,6 +5,7 @@ class Board {
   int activeX, activeY;
   color targetColor;
   boolean playerOnTarget = false;
+  boolean playerListening = false;
   BeatMatcher beatMatcher = new BeatMatcher(this);
   
   public color[] tileColors = {
@@ -70,7 +71,7 @@ class Board {
   }
   
   void movePlayer(Direction direction) {
-    if (!playerOnTarget) {
+    if (!playerOnTarget && !playerListening) {
       if (direction == Direction._UP) {
         activeX = (((activeX - 1) % tiles.length) + tiles.length) % tiles.length;
       } else if (direction == Direction._DOWN) {
