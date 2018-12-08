@@ -22,7 +22,7 @@ class Board {
         if (j > 0) {
           x += tileSize + gap;
         }
-        tiles[i][j] = new Tile(x, y, tileSize, tileSize, color(255), color(200), active);
+        tiles[i][j] = new Tile(x, y, tileSize, tileSize, color(200), active);
       }
     }
     playerTile = tiles[0][0];
@@ -48,7 +48,7 @@ class Board {
     }
     
     playerTile.active = false;
-    playerTile = tiles[activeX][activeY]; //<>//
+    playerTile = tiles[activeX][activeY]; //<>// //<>//
     playerTile.active = true;
   }
 }

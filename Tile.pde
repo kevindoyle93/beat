@@ -22,7 +22,7 @@ class Tile {
     color(255,0,126)
   };
   
-  public Tile(float x, float y, float w, float h, color fillColor, color strokeColor, boolean active) {
+  public Tile(float x, float y, float w, float h, color strokeColor, boolean active) {
     this.x = x;
     this.y = y;
     this.w = w;
