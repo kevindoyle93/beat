@@ -10,7 +10,6 @@ class Board {
     float gap = 5;
     this.tiles = new Tile[numTiles][numTiles];
     
-    assignPlayerLocation();
     
     float y = offset;
     for (int i = 0; i < tiles.length; i++) {
@@ -20,19 +19,23 @@ class Board {
       
       float x = offset;
       for (int j = 0; j < tiles[0].length; j++) {
-        boolean active = i == activeX && j == activeY;
+        
         if (j > 0) {
           x += tileSize + gap;
         }
-        tiles[i][j] = new Tile(x, y, tileSize, tileSize, color(200), active);
+        tiles[i][j] = new Tile(x, y, tileSize, tileSize, color(200), false);
       }
     }
-    playerTile = tiles[0][0];
+    
+    assignPlayerLocation();
   }
   
   void assignPlayerLocation() {
     activeX = int(random(8));
     activeY = int(random(8));
+    
+    playerTile = tiles[activeX][activeY];
+    playerTile.active = true;
   }
   
   void draw() {
