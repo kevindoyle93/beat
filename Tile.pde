@@ -19,7 +19,12 @@ class Tile {
   
   void draw() {
     fill(fillColor);
-    stroke(strokeColor);
+    if (active) {
+      strokeWeight(4);
+      stroke(color(0, 255, 0));
+    } else {
+      stroke(strokeColor);
+    }
     rect(x, y, w, h); 
   }
 }

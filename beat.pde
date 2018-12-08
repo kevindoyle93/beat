@@ -8,3 +8,7 @@ Board board = new Board(600, 8);
 void draw() {
   board.draw();
 }
+
+void keyPressed() {
+  // Tell the board to move player square
+}
