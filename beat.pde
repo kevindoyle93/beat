@@ -24,8 +24,7 @@ void setup() {
   listening = true;
   
   minim = new Minim(this);
-  tune = minim.loadFile("audio/60.wav");
-  ticks = minim.loadFile("audio/60.wav");
+  loadSongs();
   tune.play();
   
   targetBeat = int(((float(60) / float(BPM)) * 3) * 1000);
@@ -35,6 +34,7 @@ Board board;
 Gamebar gamebar;
 int startTime;
 
+boolean hittable = false;
 void draw() {
   gamebar.draw();
   board.draw();
@@ -49,6 +49,7 @@ void draw() {
     startTime = millis();
     print("ticks has started");
     listening = false;
+    hittable = true;
   }
   
   if (!listening && !ticks.isPlaying()) {
@@ -59,11 +60,17 @@ void draw() {
   targetBeat = ((60 / BPM) * 3) * 1000;
   
   if (ticks.isPlaying()) {
-    if (millis() > targetBeat + startTime) {
+    if (hittable && millis() > targetBeat + startTime) {
       board.beatMatcher.onBeatHit();
+      hittable = false;
     }
   }
   
+}
+
+void loadSongs() {
+  tune = minim.loadFile("audio/" + BPM + ".wav");
+  ticks = minim.loadFile("audio/" + BPM + ".wav");
 }
 
 void keyPressed() {

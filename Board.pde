@@ -48,7 +48,7 @@ class Board {
       }
     }
     
-    assignPlayerLocation(); //<>//
+    assignPlayerLocation(); //<>// //<>//
   }
    //<>//
   void assignPlayerLocation() {
@@ -119,7 +119,9 @@ class Board {
   
   void calculateScore(int difference) {
     if (difference < 1000) {
-      playerScore += (1000 - difference) / 10; 
+      int scoreThisRound = (1000 - difference) / 10;
+      println("Score this round: " + scoreThisRound);
+      playerScore += scoreThisRound;
     }
     println("Score: " + this.playerScore);
   }

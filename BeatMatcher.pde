@@ -13,9 +13,11 @@ class BeatMatcher {
   }
   
   void onPlayerClick() {
-    println("onPlayerClick()");
-    playerHit = true;
-    playerTime = millis();
+    if (!playerHit) {
+      println("player has hit");
+      playerHit = true;
+      playerTime = millis();
+    }
     if (beatHit) {
       getDifference();
     }
@@ -23,7 +25,7 @@ class BeatMatcher {
   
   void onBeatHit() {
     if (!beatHit) {
-      print("beat has hit");
+      println("beat has hit");
       beatHit = true;
       beatTime = millis();
     }
@@ -35,6 +37,8 @@ class BeatMatcher {
   
   void getDifference() {
     println("getDifference()");
+    println("player time: " + playerTime);
+    println("beat time: " + beatTime);
     board.onBeatDifferenceCalculated(abs(playerTime - beatTime));
     reset();
   }
