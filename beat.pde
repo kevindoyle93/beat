@@ -11,8 +11,10 @@ AudioPlayer loop;
 int BPM = 60;
 
 void setup() {
-  size(600, 600);
-  background(200);
+  size(600, 800);
+  background(255, 240, 230);
+  board = new Board(width, 150, 8);
+  gamebar = new Gamebar(150, color(20,230,0), 120, 1024);
   
   minim = new Minim(this);
   loop = minim.loadFile("audio/60.wav");
@@ -23,13 +25,14 @@ void setup() {
   }
 }
 
-Board board = new Board(600, 8);
+Board board;
+Gamebar gamebar;
 
 boolean done1, done2, done3 = false;
 ArrayList<Boolean> dones = new ArrayList();
 int numTries = 10;
 void draw() {
-  
+  gamebar.draw();
   board.draw();
   
   for (int i = 1; i <= numTries; i++) {

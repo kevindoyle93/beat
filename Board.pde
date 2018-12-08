@@ -22,7 +22,7 @@ class Board {
     color(255,0,126)
   };
   
-  public Board(int gameWidth, int numTiles) {
+  public Board(int gameWidth, int boardStart, int numTiles) {
     float tileSize = gameWidth * 0.8 / numTiles;
     float offset = gameWidth * 0.075;
     float gap = 5;
@@ -30,7 +30,7 @@ class Board {
     
     chooseTargetColour();
     
-    float y = offset;
+    float y = boardStart + offset;
     for (int i = 0; i < tiles.length; i++) {
       if (i > 0) {
         y += tileSize + gap;
@@ -42,7 +42,7 @@ class Board {
         if (j > 0) {
           x += tileSize + gap;
         }
-        tiles[i][j] = new Tile(x, y, tileSize, tileSize, color(200), false);
+        tiles[i][j] = new Tile(x, y, tileSize, tileSize, color(255, 240, 230), false);
       }
     }
     
