@@ -22,7 +22,7 @@ class Board {
         if (j > 0) {
           x += tileSize + gap;
         }
-        tiles[i][j] = new Tile(x, y, tileSize, tileSize, color(255), color(0), active);
+        tiles[i][j] = new Tile(x, y, tileSize, tileSize, color(255), color(200), active);
       }
     }
   }
