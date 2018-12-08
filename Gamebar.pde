@@ -5,10 +5,9 @@ class Gamebar {
   int gap;
   Board board;
   
-  public Gamebar(int barHeight, int bpm, int score, Board board) {
+  public Gamebar(int barHeight, int bpm, Board board) {
     this.barHeight   = barHeight;
     this.bpm         = bpm;
-    this.score       = score;
     this.board       = board;
     gap              = 10;
     
@@ -40,7 +39,7 @@ class Gamebar {
     textSize(32);
     text("Score:", width-125, 60);
     textSize(60);
-    text(score, width-170, 130);
+    text(board.playerScore, width-170, 130);
   }
   
 }

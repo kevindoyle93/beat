@@ -6,55 +6,44 @@ import ddf.minim.spi.*;
 import ddf.minim.ugens.*;
 
 Minim minim;
-AudioPlayer tune;
-AudioPlayer ticks;
-
+AudioPlayer loop;
 int targetBeat;
 
 int BPM = 60;
-
-boolean listening;
 
 void setup() {
   size(600, 800);
   background(255, 240, 230);
   board = new Board(width, 150, 8);
-  gamebar = new Gamebar(150, 120, board);
-  
-  listening = true;
+  gamebar = new Gamebar(150, 120, 1024, board);
   
   minim = new Minim(this);
-  tune = minim.loadFile("audio/60.wav");
-  ticks = minim.loadFile("audio/60.wav");
-  tune.play();
+  loop = minim.loadFile("audio/60.wav");
+  loop.loop();
+  
+  for (int i = 0; i < numTries; i++) {
+    dones.add(false);
+  }
 }
+
+void startLoops()
 
 Board board;
 Gamebar gamebar;
 
+ArrayList<Boolean> dones = new ArrayList();
+int numTries = 10;
 void draw() {
   gamebar.draw();
   board.draw();
-  board.playerListening = listening;
-  
-  if (tune.isPlaying()){
-    listening = true;
-  }
-  
-  if (listening && !tune.isPlaying()) {
-    ticks.play(0);
-    listening = false;
-  }
-  
-  if (!listening && !ticks.isPlaying()) {
-    tune.play(0);
-    listening = true;
-  } //<>//
   
   targetBeat = ((60 / BPM) * 3) * 1000;
   
-  if (millis() > 7000) {
-    matchBeatMock();
+  for (int i = 1; i <= numTries; i++) {
+    if (!dones.get(i - 1) && millis() > targetBeat * i) {
+      matchBeatMock();
+      dones.set(i - 1, true);
+    }
   }
 }
 

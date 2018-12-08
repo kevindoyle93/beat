@@ -7,6 +7,7 @@ class Board {
   boolean playerOnTarget = false;
   boolean playerListening = false;
   BeatMatcher beatMatcher = new BeatMatcher(this);
+  int playerScore = 0;
   
   public color[] tileColors = {
     color(78,255,0), 
@@ -47,7 +48,7 @@ class Board {
       }
     }
     
-    assignPlayerLocation();
+    assignPlayerLocation(); //<>//
   }
    //<>//
   void assignPlayerLocation() {
@@ -103,9 +104,20 @@ class Board {
   }
   
   void onBeatDifferenceCalculated(int difference) {
-    println("Difference: " + difference);
     playerOnTarget = false;
+    
+    // Calculate score
+    println("Difference: " + difference);
+    calculateScore(difference);
+    
     chooseTargetColour();
+  }
+  
+  void calculateScore(int difference) {
+    if (difference < 1000) {
+      playerScore += (1000 - difference) / 10; 
+    }
+    println("Score: " + this.playerScore);
   }
 }
 
