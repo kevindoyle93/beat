@@ -96,7 +96,13 @@ class Board {
   
   void beatMatch() {
     if (playerOnTarget) {
-      //do the beat matching
+      //grab time
+      //how far away was time from the target time?
+      //restart round + music
+      
+      
+      
+      
     }
   }
 }

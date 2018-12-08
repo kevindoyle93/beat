@@ -2,13 +2,13 @@ import ddf.minim.*;
 import ddf.minim.analysis.*;
 import ddf.minim.effects.*;
 import ddf.minim.signals.*;
-import ddf.minim.spi.*;
+import ddf.minim.spi.*;  
 import ddf.minim.ugens.*;
 
 Minim minim;
 AudioPlayer loop;
-int targetTime;
-
+BeatDetect beatDetect;
+BeatListener beatListener;
 int BPM = 60;
 
 void setup() {
@@ -18,20 +18,21 @@ void setup() {
   minim = new Minim(this);
   loop = minim.loadFile("audio/60.wav");
   loop.loop();
-  
-  targetTime = loop.bufferSize();
-  
+  beatDetect = new BeatDetect(loop.bufferSize(), loop.sampleRate());
+  beatDetect.setSensitivity(530);
+  beatListener = new BeatListener(beatDetect, loop);
 }
 
 Board board = new Board(600, 8);
 
-void draw() {
-  
+void draw() {  
   board.draw();
-  print(targetTime);
   
-  if (millis() == targetTime) {
-    //print(targetTime);
+  beatDetect.detect(loop.mix);
+  if (beatDetect.isKick()) {
+    println("kick");
+  } else if (beatDetect.isSnare()) {
+    println("snare");
   }
 }
 
