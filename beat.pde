@@ -14,7 +14,7 @@ void setup() {
   size(600, 800);
   background(255, 240, 230);
   board = new Board(width, 150, 8);
-  gamebar = new Gamebar(150, color(20,230,0), 120, 1024);
+  gamebar = new Gamebar(150, 120, 1024, board);
   
   minim = new Minim(this);
   loop = minim.loadFile("audio/60.wav");

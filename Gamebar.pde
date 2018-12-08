@@ -1,15 +1,15 @@
 class Gamebar {
   int barHeight;
-  color targetColor;
   int bpm;
   int score;
   int gap;
+  Board board;
   
-  public Gamebar(int barHeight, color targetColor, int bpm, int score) {
+  public Gamebar(int barHeight, int bpm, int score, Board board) {
     this.barHeight   = barHeight;
-    this.targetColor = targetColor;
     this.bpm         = bpm;
     this.score       = score;
+    this.board       = board;
     gap              = 10;
     
   }
@@ -23,7 +23,7 @@ class Gamebar {
     // draw target identifier
     stroke(255);
     strokeWeight(5);
-    fill(targetColor);
+    fill(board.targetColor);
     rect((width/2) - 65, gap, barHeight-(2*gap), barHeight-(2*gap));
     
     // draw bpm
