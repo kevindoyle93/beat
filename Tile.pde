@@ -39,7 +39,7 @@ class Tile {
     } else {
       fill(color(255, 240, 230));
     }
-    rect(x, y, w, h);
+    rect(x, y, w, h, 20g);
     fill(fillColor);
     if (active) {
       stroke(255);
@@ -47,6 +47,6 @@ class Tile {
     } else {
       noStroke(); 
     }
-    rect(x+10, y+10, w-20, h-20);
+    rect(x+10, y+10, w-20, h-20, 15);
   }
 }
