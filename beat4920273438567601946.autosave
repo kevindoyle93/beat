@@ -4,42 +4,40 @@ import ddf.minim.effects.*;
 import ddf.minim.signals.*;
 import ddf.minim.spi.*;
 import ddf.minim.ugens.*;
+import processing.sound.*;
 
 Minim minim;
 AudioPlayer loop;
+AudioPlayer test;
 int targetTime;
+SoundFile file;
 
 int BPM = 60;
 
 void setup() {
-  size(600, 800);
-  background(255, 240, 230);
-  board = new Board(width, 150, 8);
-  gamebar = new Gamebar(150, color(20,230,0), 120, 1024);
+  size(600, 600);
+  background(200);
   
   minim = new Minim(this);
   loop = minim.loadFile("audio/60.wav");
   loop.loop();
   
-  for (int i = 0; i < numTries; i++) {
-    dones.add(false);
-  }
+  file = new SoundFile(this, "audio/60.wav");
+  targetTime = int(file.duration()) * 1000;
+  print(targetTime);
+  
 }
 
-Board board;
-Gamebar gamebar;
 
-ArrayList<Boolean> dones = new ArrayList();
-int numTries = 10;
+
+Board board = new Board(600, 8);
+
 void draw() {
-  gamebar.draw();
+  
   board.draw();
   
-  for (int i = 1; i <= numTries; i++) {
-    if (!dones.get(i - 1) && millis() > 3000 * i) {
-      matchBeatMock();
-      dones.set(i - 1, true);
-    }
+  if (millis() % targetTime == 0) {
+    print("yerp");
   }
 }
 
@@ -53,13 +51,9 @@ void keyPressed() {
       board.movePlayer(Direction._LEFT);
     } else if (keyCode == RIGHT) {
       board.movePlayer(Direction._RIGHT);
+    } else if (keyCode == ENTER) {
+      // perform beat matching
+      board.beatMatch();
     }
-  } else if (key == ENTER) {
-    // perform beat matching
-    board.beatMatch();
   }
-}
-
-void matchBeatMock() {
-  board.beatMatcher.onBeatHit();
 }
