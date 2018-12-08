@@ -7,8 +7,7 @@ import ddf.minim.ugens.*;
 
 Minim minim;
 AudioPlayer loop;
-BeatDetect beatDetect;
-BeatListener beatListener;
+
 int BPM = 60;
 
 void setup() {
@@ -18,22 +17,13 @@ void setup() {
   minim = new Minim(this);
   loop = minim.loadFile("audio/60.wav");
   loop.loop();
-  beatDetect = new BeatDetect(loop.bufferSize(), loop.sampleRate());
-  beatDetect.setSensitivity(530);
-  beatListener = new BeatListener(beatDetect, loop);
 }
 
 Board board = new Board(600, 8);
 
-void draw() {  
-  board.draw();
+void draw() {
   
-  beatDetect.detect(loop.mix);
-  if (beatDetect.isKick()) {
-    println("kick");
-  } else if (beatDetect.isSnare()) {
-    println("snare");
-  }
+  board.draw();
 }
 
 void keyPressed() {
