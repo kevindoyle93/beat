@@ -28,7 +28,6 @@ void setup() {
 Board board;
 Gamebar gamebar;
 
-boolean done1, done2, done3 = false;
 ArrayList<Boolean> dones = new ArrayList();
 int numTries = 10;
 void draw() {
