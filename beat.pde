@@ -17,13 +17,27 @@ void setup() {
   minim = new Minim(this);
   loop = minim.loadFile("audio/60.wav");
   loop.loop();
+  
+  for (int i = 0; i < numTries; i++) {
+    dones.add(false);
+  }
 }
 
 Board board = new Board(600, 8);
 
+boolean done1, done2, done3 = false;
+ArrayList<Boolean> dones = new ArrayList();
+int numTries = 10;
 void draw() {
   
   board.draw();
+  
+  for (int i = 1; i <= numTries; i++) {
+    if (!dones.get(i - 1) && millis() > 3000 * i) {
+      matchBeatMock();
+      dones.set(i - 1, true);
+    }
+  }
 }
 
 void keyPressed() {
@@ -36,9 +50,13 @@ void keyPressed() {
       board.movePlayer(Direction._LEFT);
     } else if (keyCode == RIGHT) {
       board.movePlayer(Direction._RIGHT);
-    } else if (keyCode == ENTER) {
-      // perform beat matching
-      board.beatMatch();
     }
+  } else if (key == ENTER) {
+    // perform beat matching
+    board.beatMatch();
   }
+}
+
+void matchBeatMock() {
+  board.beatMatcher.onBeatHit();
 }

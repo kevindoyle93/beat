@@ -5,6 +5,7 @@ class Board {
   int activeX, activeY;
   color targetColor;
   boolean playerOnTarget = false;
+  BeatMatcher beatMatcher = new BeatMatcher(this);
   
   public color[] tileColors = {
     color(78,255,0), 
@@ -47,7 +48,7 @@ class Board {
     
     assignPlayerLocation();
   }
-  
+   //<>//
   void assignPlayerLocation() {
     activeX = int(random(8));
     activeY = int(random(8));
@@ -85,7 +86,7 @@ class Board {
       playerTile.active = true;
       
       if (playerTile.fillColor == targetColor) {
-        print("Tile is correct!");
+        println("Tile is correct!");
         //player is on the correct tile
         //player cannot move until end of round
         
@@ -96,8 +97,14 @@ class Board {
   
   void beatMatch() {
     if (playerOnTarget) {
-      //do the beat matching
+      beatMatcher.onPlayerClick();
     }
+  }
+  
+  void onBeatDifferenceCalculated(int difference) {
+    println("Difference: " + difference);
+    playerOnTarget = false;
+    chooseTargetColour();
   }
 }
 
