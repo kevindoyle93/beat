@@ -33,13 +33,20 @@ class Tile {
   }
   
   void draw() {
-    fill(fillColor);
-    strokeWeight(4);
+    noStroke();
     if (active) {
-      stroke(color(255));
+      fill(fillColor);
     } else {
-      stroke(color(200));
+      fill(color(255, 240, 230));
     }
-    rect(x, y, w, h); 
+    rect(x, y, w, h);
+    fill(fillColor);
+    if (active) {
+      stroke(255);
+      strokeWeight(4);
+    } else {
+      noStroke(); 
+    }
+    rect(x+10, y+10, w-20, h-20);
   }
 }

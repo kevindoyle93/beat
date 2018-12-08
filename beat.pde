@@ -1,11 +1,15 @@
 void setup() {
-  size(600, 600);
-  background(200);
+  size(600, 800);
+  background(255, 240, 230);
+  board = new Board(width, 150, 8);
+  gamebar = new Gamebar(150, color(20,230,0), 120, 1024);
 }
 
-Board board = new Board(600, 8);
+Board board;
+Gamebar gamebar;
 
 void draw() {
+  gamebar.draw();
   board.draw();
 }
 
