@@ -11,6 +11,7 @@ class Gamebar {
     this.bpm         = bpm;
     this.score       = score;
     gap              = 10;
+    
   }
   
   void draw() {
@@ -26,10 +27,20 @@ class Gamebar {
     rect((width/2) - 65, gap, barHeight-(2*gap), barHeight-(2*gap));
     
     // draw bpm
-    text("BPM",10 , 20);
+    
+    fill(255);
+    textSize(32);
+    text("BPM:", 40, 60);
+    textSize(60);
+    text(bpm, 30, 130);
     
     
     // draw score
+    
+    textSize(32);
+    text("Score:", width-125, 60);
+    textSize(60);
+    text(score, width-170, 130);
   }
   
 }
