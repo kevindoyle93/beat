@@ -7,7 +7,7 @@ import ddf.minim.ugens.*;
 
 Minim minim;
 AudioPlayer loop;
-int targetTime;
+int targetBeat;
 
 int BPM = 60;
 
@@ -35,8 +35,10 @@ void draw() {
   gamebar.draw();
   board.draw();
   
+  targetBeat = ((60 / BPM) * 3) * 1000;
+  
   for (int i = 1; i <= numTries; i++) {
-    if (!dones.get(i - 1) && millis() > 3000 * i) {
+    if (!dones.get(i - 1) && millis() > targetBeat * i) {
       matchBeatMock();
       dones.set(i - 1, true);
     }
