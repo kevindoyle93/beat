@@ -11,7 +11,7 @@ AudioPlayer ticks;
 
 int targetBeat;
 
-int BPM = 120;
+int BPM = 60;
 
 boolean listening;
 
@@ -25,7 +25,7 @@ void setup() {
   
   minim = new Minim(this);
   tune = minim.loadFile("audio/60.wav");
-  ticks = minim.loadFile("audio/120.wav");
+  ticks = minim.loadFile("audio/60.wav");
   tune.play();
   
   targetBeat = int(((float(60) / float(BPM)) * 3) * 1000);
